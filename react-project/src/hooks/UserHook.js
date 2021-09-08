@@ -1,24 +1,13 @@
 import { useState } from "react";
-function useHook(data, itemsPerPage) {        
-    const [currentPage, setCurrentPage] = useState(1);        
-    const maxPage = Math.ceil(data.length / itemsPerPage);        
-    function currentData() {            
-        const begin = (currentPage - 1) * itemsPerPage;            
-        const end = begin + itemsPerPage;            
-        return data.slice(begin, end);       
-    }        
-    function next() {            
-        setCurrentPage((currentPage) => Math.min(currentPage + 1, maxPage));       
-    }       
-    function prev() {           
-        setCurrentPage((currentPage) => Math.max(currentPage - 1, 1));       
-    }        
-    function jump(page) {            
-        const pageNumber = Math.max(1, page);            
-        setCurrentPage((currentPage) => Math.min(pageNumber, maxPage));       
-    }        
-    return { 
-        next, prev, jump, currentData, currentPage, maxPage 
-    };
-}
-export default useHook;
+const userList = [  {id: 0, name: 'Huyen'},  {id: 1, name: 'Hoa'},  {id: 2, name: 'Hung'},  {id: 3, name: 'Long'},]
+function UserHook() {  
+    const [user, setUser] = useState(userList[0]);  
+    const next = () => {    
+        if (user === userList[userList.length-1]){      
+            setUser(userList[0]);    }
+            else{      setUser(userList[user.id+1]);    }  } 
+             const back = () => {    
+                 if (user === userList[0]){      setUser(userList[userList.length-1]);    }
+                 else{      setUser(userList[user.id-1]);    }  }  
+                 return [user, next, back, userList];}
+                 export default UserHook;
