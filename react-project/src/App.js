@@ -1,25 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import UserHook from './hooks/UserHook';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [user, next, back, userList] = UserHook();  
+  return (    
+    <div className="App">      
+    <div>        
+      <span>学生一覧：[{userList.map(item => item.name).join(',')}]        </span>
+      <br/>        
+      <span>位置：{user.id +1}        </span>
+      <br/>        
+      <span>名前：{user.name}        </span>
+      <br/>        
+      <span>          
+        <button onClick={next}>次に</button>          
+        <button onClick={back}>前に</button>        
+      </span>
+      <br/>      
+    </div>   
+    </div>  
+    );
 }
 
 export default App;
